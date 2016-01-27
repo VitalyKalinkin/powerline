@@ -79,7 +79,7 @@ class Repository(object):
 				return self.repo_statuses_str[resulting_status]
 
 	def branch(self):
-		config_file = join(self.directory, '.hg', 'branch')
+		config_file = join(self.directory, '.hg', 'bookmark.current')
 		return get_branch_name(
 			directory=self.directory,
 			config_file=config_file,
