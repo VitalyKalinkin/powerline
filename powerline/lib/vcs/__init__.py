@@ -83,6 +83,11 @@ def get_branch_name(directory, config_file, get_func, create_watcher):
 			branch_name_cache[config_file] = out_u(get_func(directory, config_file))
 		return branch_name_cache[config_file]
 
+def get_out_from_cmd(command):
+    import subprocess
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+    (out, err) = proc.communicate()
+    return out
 
 class FileStatusCache(dict):
 	def __init__(self):
