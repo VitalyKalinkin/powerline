@@ -5,7 +5,7 @@ import os
 
 import hglib
 
-from powerline.lib.vcs import get_branch_name, get_file_status
+from powerline.lib.vcs import get_branch_name, get_file_status, get_out_from_cmd
 from powerline.lib.path import join
 from powerline.lib.encoding import get_preferred_file_contents_encoding
 
@@ -79,10 +79,11 @@ class Repository(object):
 				return self.repo_statuses_str[resulting_status]
 
 	def branch(self):
-		config_file = join(self.directory, '.hg', 'bookmarks.current')
-		return get_branch_name(
-			directory=self.directory,
-			config_file=config_file,
-			get_func=branch_name_from_config_file,
-			create_watcher=self.create_watcher,
-		)
+                return get_out_from_cmd("hg bookmark | grep \* | awk '{ print $2}'")
+		#config_file = join(self.directory, '.hg', 'bookmarks.current')
+		#return get_branch_name(
+                #		directory=self.directory,
+		#	config_file=config_file,
+	        #		get_func=branch_name_from_config_file,
+		#	create_watcher=self.create_watcher,
+		#)
